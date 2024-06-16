@@ -14,7 +14,7 @@ function saveData() {
     const result = (21 - t1 - t2 - (p1 * 0.9)) / 0.1;
 
     // Muestra el resultado en el elemento con id="output"
-    document.getElementById('output').innerText = 'Resultado: ' + result.toFixed(2);
+    document.getElementById('output').innerText = 'Necesitas: ' + result.toFixed(2);
 
     // Llama a la función para evaluar el resultado
     evaluateResult(result);
@@ -23,11 +23,11 @@ function saveData() {
 function evaluateResult(result) {
     let message = '';
     if (result > 10) {
-        message = 'Ni queriendo pasas, tendrías que sacar: ' + result.toFixed(2);
+        message = 'Mejor estudia para el supletorio';
     } else if (result < 0) {
         message = 'Sacando 0 pasas, chillout';
     } else {
-        message = 'Resultado dentro del rango esperado.';
+        message = 'Gracias por usar Pondukay';
     }
 
     // Muestra el mensaje en el elemento con id="message"
