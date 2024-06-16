@@ -1,2 +1,2 @@
 # pondukay
-Calculadora ponderado promedio final
+Esta calculadora te dira que nota debes sacar para pasar.
