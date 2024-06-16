@@ -4,7 +4,7 @@
   "description": "Calculadora de ponderado, por ahora solo para mi UE (Saint Dominic School) bajo el sistema Idukay y los porcentajes establecidos.",
   "main": "index.js",
   "scripts": {
-    "test": "bigin"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
