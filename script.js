@@ -1,7 +1,7 @@
 // Declarar las variables en un ámbito global
 let t1 = 0, t2 = 0, p1 = 0;
 
-function saveData() {
+function exCalc() {
     // Obtiene los valores de los campos de texto
     t1 = parseFloat(document.getElementById('t1').value);
     t2 = parseFloat(document.getElementById('t2').value);
