@@ -11,7 +11,7 @@ function saveData() {
     console.log('t1:', t1, 't2:', t2, 'p1:', p1);
 
     // Realiza la operación matemática
-    const result = (21 - t1 - t2 - (p1 * 0.9)) / 2;
+    const result = (21 - t1 - t2 - (p1 * 0.9)) / 0.1;
 
     // Muestra el resultado en el elemento con id="output"
     document.getElementById('output').innerText = 'Resultado: ' + result.toFixed(2);
