@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "xyz.cripsitorey.twa",
+                 "sha256_cert_fingerprints": ["9E:8D:AC:2C:41:ED:E8:D5:CD:15:F2:68:96:E9:48:19:08:99:B6:F8:0B:F6:03:F8:A8:F4:BC:C4:44:81:7C:65"] }
+  }]
