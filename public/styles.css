@@ -1,0 +1,144 @@
+body {
+    background: linear-gradient(to right, #0000FF, #4B0082);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Evita el desplazamiento de toda la página */
+}
+
+.container {
+    /* display: none; */
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    height: 100%;
+    background-color: #1c1c1c; /* Color oscuro */
+    padding: 20px;
+    border-radius: 15px; /* Border radius actualizado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #ffffff; /* Color de texto blanco */
+    overflow: hidden; /* Evita el desplazamiento interno */
+}
+
+.half-container {
+    flex: 1;
+    padding: 20px;
+    margin: 10px;
+    overflow: hidden; /* Evita el desplazamiento interno */
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label, input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 8px;
+    border-radius: 15px; /* Border radius actualizado */
+    border: 1px solid #444;
+    box-sizing: border-box;
+    background-color: #333; /* Fondo oscuro para las entradas */
+    color: #ffffff; /* Texto blanco para las entradas */
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px; /* Border radius actualizado */
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#output {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#message {
+    margin-top: 10px;
+    font-size: 16px;
+    color: red;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Estilos para la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1c1c1c;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 600px) {
+    body {
+        overflow: auto; /* Permite el desplazamiento de la página completa en móviles */
+    }
+
+    .container {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        border-radius: 0; /* Sin borde redondeado */
+        padding: 15px;
+    }
+
+    .half-container {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    #output {
+        font-size: 16px;
+    }
+
+    #message {
+        font-size: 14px;
+    }
+}

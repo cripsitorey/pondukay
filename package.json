@@ -1,22 +1,17 @@
 {
-  "name": "pondukay",
+  "name": "idukay-scraper",
   "version": "1.0.0",
-  "description": "Calculadora de ponderado, por ahora solo para mi UE (Saint Dominic School) bajo el sistema Idukay y los porcentajes establecidos.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cripsitorey/pondukay.git"
-  },
-  "keywords": [
-    "Ponderado"
-  ],
-  "author": "Crip",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cripsitorey/pondukay/issues"
-  },
-  "homepage": "https://github.com/cripsitorey/pondukay#readme"
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "puppeteer": "^22.11.1"
+  }
 }

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pondukay</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <div class="half-container">
+            <h1>Pondukay - Cálculo de Nota Final</h1>
+            <form id="finalExamForm">
+                <label for="trim1">Primer Trimestre:</label>
+                <input type="number" id="trim1" placeholder="Introduce el promedio del primer trimestre">
+                <label for="trim2">Segundo Trimestre:</label>
+                <input type="number" id="trim2" placeholder="Introduce el promedio del segundo trimestre">
+                <label for="trim3">Tercer Trimestre:</label>
+                <input type="number" id="trim3" placeholder="Introduce el promedio del tercer trimestre">
+                <label for="trim1">Primer Trimestre:</label>
+                <input type="number" id="trim4" placeholder="Introduce el promedio del primer trimestre">
+                <label for="trim2">Segundo Trimestre:</label>
+                <input type="number" id="trim5" placeholder="Introduce el promedio del segundo trimestre">
+                <label for="trim3">Tercer Trimestre:</label>
+                <input type="number" id="trim6" placeholder="Introduce el promedio del tercer trimestre">
+                <label for="trim1">Primer Trimestre:</label>
+                <input type="number" id="trim7" placeholder="Introduce el promedio del primer trimestre">
+                <label for="trim2">Segundo Trimestre:</label>
+                <input type="number" id="trim8" placeholder="Introduce el promedio del segundo trimestre">
+                <label for="trim3">Tercer Trimestre:</label>
+                <input type="number" id="trim9" placeholder="Introduce el promedio del tercer trimestre">
+                <label for="trim1">Primer Trimestre:</label>
+                <input type="number" id="trim10" placeholder="Introduce el promedio del primer trimestre">
+                <label for="trim2">Segundo Trimestre:</label>
+                <input type="number" id="trim11" placeholder="Introduce el promedio del segundo trimestre">
+                <label for="trim3">Tercer Trimestre:</label>
+                <input type="number" id="trim12" placeholder="Introduce el promedio del tercer trimestre">
+                <label for="trim2">Segundo Trimestre:</label>
+                <input type="number" id="trim13" placeholder="Introduce el promedio del segundo trimestre">
+                <label for="trim3">Tercer Trimestre:</label>
+                <input type="number" id="trim14" placeholder="Introduce el promedio del tercer trimestre">
+                <label for="trim2">Segundo Trimestre:</label>
+                <input type="number" id="trim15" placeholder="Introduce el promedio del segundo trimestre">
+                <label for="trim3">Tercer Trimestre:</label>
+                <input type="number" id="trim16" placeholder="Introduce el promedio del tercer trimestre">
+                <label for="ef">Examen Final:</label>
+                <input type="number" id="ef" placeholder="Introduce la nota del examen final">
+                <button type="button" onclick="exCalc()">Calcular</button>
+            </form>
+            <h2 id="output"></h2>
+            <h3 id="message"></h3>
+        </div>
+        <div class="half-container">
+            <h1>Pondukay - Cálculo de Trimestres</h1>
+            <div id="trimesters">
+                <div class="trimester" id="trimester1">
+                    <h2>Primer Trimestre</h2>
+                    <div id="inputs1"></div>
+                    <button type="button" onclick="addInput(1)">+</button>
+                    <h3 id="result1"></h3>
+                </div>
+                <div class="trimester" id="trimester2">
+                    <h2>Segundo Trimestre</h2>
+                    <div id="inputs2"></div>
+                    <button type="button" onclick="addInput(2)">+</button>
+                    <h3 id="result2"></h3>
+                </div>
+                <div class="trimester" id="trimester3">
+                    <h2>Tercer Trimestre</h2>
+                    <div id="inputs3"></div>
+                    <button type="button" onclick="addInput(3)">+</button>
+                    <h3 id="result3"></h3>
+                </div>
+            </div>
+            <button type="button" onclick="calculateTrimesters()">Calcular Trimestres</button>
+        </div>
+    </div>
+
+    <div class="half-container">
+        <h1>Iniciar sesión en Idukay</h1>
+        <form id="idukayLoginForm" onsubmit="handleLogin(event)">
+            <label for="idukayUsername">Usuario:</label>
+            <input type="text" id="idukayUsername" placeholder="Usuario">
+            <label for="idukayPassword">Contraseña:</label>
+            <input type="password" id="idukayPassword" placeholder="Contraseña">
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registrado con éxito:', registration.scope);
+                    }).catch(error => {
+                        console.log('Error en el registro del ServiceWorker:', error);
+                    });
+            });
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('idukayUsername').value;
+            const password = document.getElementById('idukayPassword').value;
+            fetchNotasIdukay(username, password);
+        }
+    </script>
+</body>
+</html>
