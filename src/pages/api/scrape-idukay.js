@@ -16,7 +16,12 @@ export default async function handler(req, res) {
       let profileID = null;
       const targetEndpoint = 'https://idukay.net/api/login'; // Endpoint donde se obtiene el token
       
-      const browser = await puppeteer.launch({ headless: true });
+      const browser = await puppeteer.launch({
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--headless'],
+        headless: true,
+        timeout: 90000,  // Aumenta el tiempo de espera
+      });
+      
       const page = await browser.newPage();
 
       await page.setUserAgent(
