@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import fetch from 'node-fetch';
-
+///opt/render/.cache/puppeteer/chrome/linux-131.0.6778.69/chrome-linux64/chrome
 const url = 'https://idukay.net/api/students?__sort={"relational_data.name.order":"asc"}&populate={"user":"photo name surname second_name second_surname"}&select=user';
 
 export default async function handler(req, res) {
