@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import fetch from 'node-fetch';
-const { UserAgent, random } = require('user-agents');
+
 const url = 'https://idukay.net/api/students?__sort={"relational_data.name.order":"asc"}&populate={"user":"photo name surname second_name second_surname"}&select=user';
 
 export default async function handler(req, res) {
