@@ -21,7 +21,7 @@ export async function handler(event, context) {
       // Usar chrome-aws-lambda para obtener el ejecutable de Chrome adecuado
       const browser = await puppeteer.launch({
         args: [...chrome.args, '--disable-dev-shm-usage', '--no-sandbox'], // Agregar argumentos de chromium para Lambda
-        executablePath: await chrome.executablePath(), // Obtener el ejecutable adecuado
+        executablePath: chrome.executablePath(), // Obtener el ejecutable adecuado
         headless: chrome.headless, // Ejecutar en modo headless
       });
 
