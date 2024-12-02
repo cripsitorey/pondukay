@@ -4,8 +4,8 @@
   "private": false,
   "scripts": {
     "dev": "next dev",
-    "install-chromium": "sh install-chromium.sh",
-    "build": "npm run install-chromium && next build",
+    "install-chromium": "npx puppeteer browsers install",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
