@@ -4,7 +4,7 @@
   "private": false,
   "scripts": {
     "dev": "next dev",
-    "build": "npx puppeteer browsers install chrome && npm install && next build",
+    "build": "npm install && npx puppeteer browsers install chrome && next build",
     "start": "next start",
     "lint": "next lint"
   },
