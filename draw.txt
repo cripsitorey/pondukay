@@ -1,0 +1,286 @@
+response.subjects.[materia\\1].courses.0.year_summary.terms.[trimestre\\0].parts.0.
+activity.types.[i\\0].activities.[i\\0].score
+x == objeto
+l == array
+x l x l x x l x l x l x 
+response.subjects[i].courses[0].year_summary.terms[ii].parts[0].activity_types[iii].
+activities[iiii].score
+
+
+import fetch from "node-fetch";
+import puppeteer from "puppeteer";
+
+const url = "https://idukay.net/api/student_year_summary?include_averages=true&student=5cf801051e8444f37ae55cf4";
+
+const headers = {
+  "authorization": "8f9a29ec19783f409f9a7aa7774fa9519eee9fde",
+  "clientversion": "7.0.0",
+  "selectedstudent": "5cf801051e8444f37ae55cf4",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+  "workingprofile": "5cdc8601039c5cb73954dff1",
+  "workingschool": "5cd3796504092ea504812ff8",
+  "workingyear": "64d4f946782ad5085bd5da42",
+};
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') { // Cambié res.method por req.method
+    const { username, password } = req.body;
+    try {
+      let authToken = null;
+      let studentID = null;
+      const browser = await puppeteer.launch({ headless: false });
+      const page = await browser.newPage();
+      const targetEndpoint = "https://idukay.net/api/login";
+
+      page.on('response', async (response) => {
+        if (response.url().includes(targetEndpoint)) {
+          try {
+            const responseBody = await response.json();
+            if (responseBody.token) {
+              authToken = responseBody.response.token; // Captura el token
+              console.log('Token capturado:', authToken);
+            }
+          } catch (err) {
+            console.error('Error procesando la respuesta:', err);
+          }
+        }
+      });
+
+      page.goto('https://idukay.net/');
+      await page.waitForSelector('input[type="password"]');
+      await page.type('input[type="text"]', username);
+      await page.type('input[type="password"]', password);
+      await Promise.all([
+        page.waitForSelector('div[class="navbar-header pull-left hidden-xs"]'),
+        await page.click('button[type="submit"]'),
+      ]);
+
+
+      let notas = "";  // Variable para almacenar la respuesta
+      const response = await fetch(url, { method: "GET", headers });
+      notas = await response.json(); // Almacena la respuesta en la variable
+      console.log("Datos almacenados:", notas); 
+      // console.log(notas.response.subjects[1].courses[0].year_summary.terms[0].parts[0].activity_types[0].activities[2].score)
+      res.status(200).json({ success: true, notas });
+    } catch (error) {
+      console.error('Error scraping Idukay:', error);
+      res.status(500).json({ success: false, error: 'Error scraping Idukay' });
+    }
+    console.log("Funcione");
+  } else {
+    res.status(405).json({ error: 'Method not allowed' });
+    console.log("No funcione");
+  }
+}
+
+"1f3a58214f1e81fc401409f9d0a443dcc545a7d8"
+
+
+
+import puppeteer from 'puppeteer';
+import fetch from 'node-fetch';
+const { UserAgent, random } = require('user-agents');
+
+let url = null;
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { username, password } = req.body;
+    try {
+      let authToken = null;
+      let studentID = null;
+      let schooolID = null;
+      let lectiveID = null;
+      let profileID = null;
+      const targetEndpoint = 'https://idukay.net/api/login'; // Endpoint donde se obtiene el token
+      
+      const browser = await puppeteer.launch({ headless: true });
+      const page = await browser.newPage();
+      
+      await page.setUserAgent(
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'
+      );
+      // Intercepta las respuestas para capturar el token
+      page.on('response', async (response) => {
+        try {
+          // console.log('Interceptando respuesta de URL:', response.url());
+          
+          // Verifica si la URL contiene alguna parte relevante del endpoint
+          if (response.url().includes(targetEndpoint)) {
+            console.log('Posible respuesta relevante encontrada.');
+            
+            // Intenta obtener el cuerpo de la respuesta
+            const responseBody = await response.text(); // Cambiar a text para inspeccionar todo
+            console.log('Cuerpo de la respuesta:', responseBody);
+            
+            // Intenta parsear como JSON si es posible
+            try {
+              const jsonResponse = JSON.parse(responseBody);
+              if (jsonResponse.response.token) {
+                authToken = jsonResponse.response.token;
+                // studentID = jsonResponse.response.user.preferences.selected_student._id;
+                schooolID = jsonResponse.response.user.school;
+                lectiveID = jsonResponse.response.user.preferences.working_year._id;
+                profileID = jsonResponse.response.user.preferences.working_profile._id;
+                console.log('Token de autorización capturado:', authToken);
+              }
+            } catch (err) {
+              console.log('No es JSON válido:', err);
+            }
+          }
+        } catch (err) {
+          console.error('Error al procesar la respuesta:', err);
+        }
+      });
+      // Navega al sitio y realiza el inicio de sesión
+      await page.goto('https://idukay.net/', { waitUntil: 'networkidle2' });
+      await page.waitForSelector('input[type="password"]');
+      await page.type('input[type="text"]', username);
+      await page.type('input[type="password"]', password);
+      
+      await Promise.all([
+        page.waitForNavigation({ waitUntil: 'networkidle2' }),
+        page.click('button[type="submit"]'),
+      ]);
+      
+      // Espera a que se capture el token
+      await delay(500);
+      if (studentID == profileID) {
+        url = "https://idukay.net/api/my_year_summary?include_averages=true";
+      } else {
+        url = "https://idukay.net/api/student_year_summary?include_averages=true&student="+studentID
+      }
+
+      const headers = {
+        "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+        "Authorization": authToken,
+        "WorkingYear": lectiveID,
+        "WorkingSchool": schooolID,
+        "WorkingProfile": profileID,
+        // "SelectedStudent": studentID,
+        "ClientVersion": "7.0.0",
+      };
+      console.log(headers);
+      let notas = "";  // Variable para almacenar la respuesta
+      const response = await fetch(url, { method: "GET", headers });
+      notas = await response.json(); // Almacena la respuesta en la variable
+      // console.log(notas.response.subjects[1].courses[0].year_summary.terms[0].parts[0].activity_types[0].activities[2].score)
+      res.status(200).json({ success: true, notas });
+      await browser.close();
+
+    } catch (err) {
+      console.error('Error:', err);
+      res.status(500).json({ success: false, error: err.message });
+    }
+  } else {
+    res.status(405).json({ success: false, message: 'Método no permitido.' });
+  }
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+
+
+
+
+import puppeteer from 'puppeteer';
+import fetch from 'node-fetch';
+const { UserAgent, random } = require('user-agents');
+const url = "https://idukay.net/api/my_year_summary?include_averages=true";
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { username, password } = req.body;
+    try {
+      let authToken = null;
+      let studentID = null;
+      let schooolID = null;
+      let lectiveID = null;
+      let profileID = null;
+      const targetEndpoint = 'https://idukay.net/api/login'; // Endpoint donde se obtiene el token
+      
+      const browser = await puppeteer.launch({ headless: true });
+      const page = await browser.newPage();
+
+      await page.setUserAgent(
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'
+      );
+      // Intercepta las respuestas para capturar el token
+      page.on('response', async (response) => {
+        try {
+          // console.log('Interceptando respuesta de URL:', response.url());
+          
+          // Verifica si la URL contiene alguna parte relevante del endpoint
+          if (response.url().includes(targetEndpoint)) {
+            console.log('Posible respuesta relevante encontrada.');
+            
+            // Intenta obtener el cuerpo de la respuesta
+            const responseBody = await response.text(); // Cambiar a text para inspeccionar todo
+            console.log('Cuerpo de la respuesta:', responseBody);
+            
+            // Intenta parsear como JSON si es posible
+            try {
+              const jsonResponse = JSON.parse(responseBody);
+              if (jsonResponse.response.token) {
+                authToken = jsonResponse.response.token;
+                studentID = jsonResponse.response.user.preferences.selected_student._id;
+                schooolID = jsonResponse.response.user.school;
+                lectiveID = jsonResponse.response.user.preferences.working_year._id;
+                profileID = jsonResponse.response.user.preferences.working_profile._id;
+                console.log('Token de autorización capturado:', authToken);
+              }
+            } catch (err) {
+              console.log('No es JSON válido:', err);
+            }
+          }
+        } catch (err) {
+          console.error('Error al procesar la respuesta:', err);
+        }
+      });
+      // Navega al sitio y realiza el inicio de sesión
+      await page.goto('https://idukay.net/', { waitUntil: 'networkidle2' });
+      await page.waitForSelector('input[type="password"]');
+      await page.type('input[type="text"]', username);
+      await page.type('input[type="password"]', password);
+      
+      await Promise.all([
+        page.waitForNavigation({ waitUntil: 'networkidle2' }),
+        page.click('button[type="submit"]'),
+      ]);
+
+      // await page.goto('https://idukay.net/#/my_reportcard')
+      // Espera a que se capture el token
+      await delay(500);
+
+      const headers = {
+        "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+        "Authorization": authToken,
+        "WorkingYear": lectiveID,
+        "WorkingSchool": schooolID,
+        "WorkingProfile": profileID,
+        "SelectedStudent": studentID,
+        "ClientVersion": "7.0.0",
+      };
+      console.log(headers);
+      let notas = "";  // Variable para almacenar la respuesta
+      const response = await fetch(url, { method: "GET", headers });
+      notas = await response.json(); // Almacena la respuesta en la variable
+      console.log("Datos almacenados:", notas);
+      // console.log(notas.response.subjects[1].courses[0].year_summary.terms[0].parts[0].activity_types[0].activities[2].score)
+      res.status(200).json({ success: true, notas });
+      await browser.close();
+
+    } catch (err) {
+      console.error('Error:', err);
+      res.status(500).json({ success: false, error: err.message });
+    }
+  } else {
+    res.status(405).json({ success: false, message: 'Método no permitido.' });
+  }
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
