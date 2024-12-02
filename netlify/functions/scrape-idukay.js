@@ -1,4 +1,3 @@
-// netlify/functions/scrape-idukay.js
 import puppeteer from 'puppeteer-core';
 import fetch from 'node-fetch';
 import chrome from 'chrome-aws-lambda';
@@ -21,9 +20,9 @@ export async function handler(event, context) {
       
       // Usar chrome-aws-lambda para obtener el ejecutable de Chrome adecuado
       const browser = await puppeteer.launch({
-        args: [...chrome.args, '--disable-dev-shm-usage'],
-        executablePath: await chrome.executablePath,
-        headless: chrome.headless,
+        args: [...chrome.args, '--disable-dev-shm-usage', '--no-sandbox'], // Agregar argumentos de chromium para Lambda
+        executablePath: await chrome.executablePath(), // Obtener el ejecutable adecuado
+        headless: chrome.headless, // Ejecutar en modo headless
       });
 
       const page = await browser.newPage();
