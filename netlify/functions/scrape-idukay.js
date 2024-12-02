@@ -1,7 +1,8 @@
 // netlify/functions/scrape-idukay.js
 import puppeteer from 'puppeteer-core';
 import fetch from 'node-fetch';
-// const { UserAgent, random } = require('user-agents');
+import chrome from 'chrome-aws-lambda';
+
 const url = 'https://idukay.net/api/students?__sort={"relational_data.name.order":"asc"}&populate={"user":"photo name surname second_name second_surname"}&select=user';
 
 export async function handler(event, context) {
@@ -18,7 +19,13 @@ export async function handler(event, context) {
       let profileID = null;
       const targetEndpoint = 'https://idukay.net/api/login'; // Endpoint donde se obtiene el token
       
-      const browser = await puppeteer.launch({ headless: true });
+      // Usar chrome-aws-lambda para obtener el ejecutable de Chrome adecuado
+      const browser = await puppeteer.launch({
+        args: [...chrome.args, '--disable-dev-shm-usage'],
+        executablePath: await chrome.executablePath,
+        headless: chrome.headless,
+      });
+
       const page = await browser.newPage();
 
       await page.setUserAgent(
