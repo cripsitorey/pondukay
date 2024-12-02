@@ -14,8 +14,7 @@
     "node-fetch": "^2.7.0",
     "puppeteer-core": "^23.9.0",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
-    "user-agents": "^1.0.0"
+    "react-dom": "19.0.0-rc-66855b96-20241106"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

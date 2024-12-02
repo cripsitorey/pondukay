@@ -1,7 +1,7 @@
 // netlify/functions/scrape-idukay.js
 import puppeteer from 'puppeteer-core';
 import fetch from 'node-fetch';
-const { UserAgent, random } = require('user-agents');
+// const { UserAgent, random } = require('user-agents');
 const url = 'https://idukay.net/api/students?__sort={"relational_data.name.order":"asc"}&populate={"user":"photo name surname second_name second_surname"}&select=user';
 
 export async function handler(event, context) {
