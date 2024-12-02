@@ -4,7 +4,8 @@
   "private": false,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "install-chromium": "sh install-chromium.sh",
+    "build": "npm run install-chromium && next build",
     "start": "next start",
     "lint": "next lint"
   },
