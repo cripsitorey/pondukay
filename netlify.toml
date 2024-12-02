@@ -1,4 +1,4 @@
 [build.environment]
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "false"
 [build]
-  command = "npm run install-chromium && npm run build"
+  command = "npm run build"

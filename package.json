@@ -15,11 +15,11 @@
     "puppeteer-core": "^23.9.0",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "user-agents": "^1.1.372"
+    "user-agents": "^1.1.375"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
-    "eslint": "^8",
+    "eslint": "^8.57.1",
     "eslint-config-next": "15.0.3",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15"

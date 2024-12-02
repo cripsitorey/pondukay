@@ -12,7 +12,7 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch('/api/scrape-idukay', {
+      const response = await fetch('https://radiant-bunny-aaaca6.netlify.app/.netlify/functions/scrape-idukay', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
