@@ -76,7 +76,7 @@ export default async function handler(req, res) {
           "WorkingSchool": schooolID,
           "WorkingProfile": profileID,
           "SelectedStudent": studentID,
-          "ClientVersion": "7.0.0",
+          "ClientVersion": "7.0.3",
         };
         console.log(headers);
         const response = await fetch(url, { method: "GET", headers });
@@ -92,7 +92,7 @@ export default async function handler(req, res) {
               "WorkingSchool": schooolID,
               "WorkingProfile": profileID,
               "SelectedStudent": studentID,
-              "ClientVersion": "7.0.0",
+              "ClientVersion": "7.0.3",
             };
         
             console.log(headerse);
@@ -120,7 +120,7 @@ export default async function handler(req, res) {
           "WorkingSchool": schooolID,
           "WorkingProfile": profileID,
           "SelectedStudent": studentID,
-          "ClientVersion": "7.0.0",
+          "ClientVersion": "7.0.3",
         };
         console.log(headers);
         const urll = `https://idukay.net/api/my_year_summary?include_averages=true`;

@@ -68,7 +68,7 @@ export default async function handler(req, res) {
           "WorkingSchool": schooolID,
           "WorkingProfile": profileID,
           "SelectedStudent": studentID,
-          "ClientVersion": "7.0.0",
+          "ClientVersion": "7.0.3",
         };
         const response = await fetch(url, { method: "GET", headers });
         notas = await response.json();
@@ -79,7 +79,7 @@ export default async function handler(req, res) {
           "WorkingYear": lectiveID,
           "WorkingSchool": schooolID,
           "WorkingProfile": profileID,
-          "ClientVersion": "7.0.0",
+          "ClientVersion": "7.0.3",
         };
         const urll = 'https://idukay.net/api/students?__sort={"relational_data.name.order":"asc"}&populate={"user":"photo name surname second_name second_surname"}&select=user'
         let lujus = null;
@@ -95,7 +95,7 @@ export default async function handler(req, res) {
             "WorkingSchool": schooolID,
             "WorkingProfile": profileID,
             "SelectedStudent": lujus.response[i]._id,
-            "ClientVersion": "7.0.0",
+            "ClientVersion": "7.0.3",
           };
           const response = await fetch(url, { method: "GET", headers });
           notas = await response.json();
