@@ -59,7 +59,7 @@ export default function Home() {
             value={credentials.username}
             onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
           />
           <input
             type="password"
@@ -67,7 +67,7 @@ export default function Home() {
             value={credentials.password}
             onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
           />
           <button
             type="submit"
@@ -86,10 +86,10 @@ export default function Home() {
             id="studentSelector"
             value={students.findIndex((s) => s === selectedStudent)}
             onChange={handleStudentChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
           >
             {students.map((student, index) => (
-              <option key={student.id} value={index}>
+              <option key={student.id} value={index} className='text-black'>
                 {student.name}
               </option>
             ))}
