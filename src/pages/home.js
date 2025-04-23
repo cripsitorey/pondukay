@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Image from 'next/image';
+import HowToUse from '@/components/HowToUse';
 import GradesTable from '../components/GradesTable';
 
 export default function Home() {
@@ -18,7 +20,7 @@ export default function Home() {
         body: JSON.stringify(credentials),
       });
       const data = await response.json();
-
+      
       setNotas(data.notas);
 
       if (Array.isArray(data.notas)) {
@@ -50,6 +52,8 @@ export default function Home() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Calificaciones</h1>
+      <HowToUse />
+      <Image src="/logo.png" alt="Logo" className="w-16 h-16" width={100} height={100} />
       {loading && <p>Cargando...</p>}
       {!notas && (
         <form onSubmit={handleLogin} className="space-y-4">

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "crypto-js": "^4.2.0",
+    "lucide-react": "^0.503.0",
     "next": "15.0.3",
     "node-fetch": "^3.3.2",
     "puppeteer": "^23.8.0",
