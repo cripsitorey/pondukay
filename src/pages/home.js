@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NotasTable from '../components/NotasTable';
+import GradesTable from '../components/GradesTable';
 
 export default function Home() {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -96,8 +96,8 @@ export default function Home() {
           </select>
         </div>
       )}
-      {notas && !Array.isArray(notas) && <NotasTable notas={notas} />}
-      {selectedStudent && <NotasTable notas={selectedStudent.data.resulto} />}
+      {notas && !Array.isArray(notas) && <GradesTable notas={notas} />}
+      {selectedStudent && <GradesTable notas={selectedStudent.data.resulto} />}
     </div>
   );
 }

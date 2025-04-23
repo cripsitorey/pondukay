@@ -55,7 +55,7 @@ export default async function handler(req, res) {
         "WorkingYear": lectiveID,
         "WorkingSchool": schooolID,
         "WorkingProfile": profileID,
-        "ClientVersion": "7.0.3",
+        "ClientVersion": "7.0.6",
       };
 
       let notas = [];
