@@ -51,8 +51,10 @@ export default function Home() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Calificaciones</h1>
-      <HowToUse />
+      <h1 className="text-2xl font-bold mb-4">Calificaciones IDUKAY</h1>
+      <h2 className="text-xl font-bold mb-4">Bienvenido {credentials.username}</h2>
+      <h2 className="text-xl font-bold mb-4 bg-red-600">PARA CUENTAS DE PADRE SOLO FUNCIONA EL PRIMER ESTUDIANTE</h2>
+      {!notas && <HowToUse />}
       <Image src="/logo.png" alt="Logo" className="w-16 h-16" width={100} height={100} />
       {loading && <p>Cargando...</p>}
       {!notas && (
